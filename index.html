@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telkon One Group | Global Excellence & Innovation</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&family=Space+Grotesk:wght@300;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --telkon-gold: #c5a059;
+            --telkon-dark: #0a0a0b;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--telkon-dark);
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f5d18d 0%, #c5a059 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .vertical-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .vertical-card:hover {
+            border-color: var(--telkon-gold);
+            background: rgba(197, 160, 89, 0.05);
+            transform: translateY(-10px);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+        }
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 11, 0.8);
+        }
+    </style>
+    <!-- Chosen Palette: Sovereign Gold & Obsidian Black -->
+    <!-- Application Structure: Holding Portfolio, Global Verticals, Impact Statistics, Multi-lingual Support. -->
+    <!-- Visualization: Polar area chart for operational distribution. -->
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="text-3xl font-black tracking-tighter uppercase">
+                    TELKON<span class="text-[#c5a059]">ONE</span> <span class="text-xs font-light tracking-[0.3em] block opacity-40">GROUP</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex gap-10 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+                <a href="#vision" data-i18n="nav_vision" class="hover:text-[#c5a059] transition-colors">Vizyon</a>
+                <a href="#verticals" data-i18n="nav_verticals" class="hover:text-[#c5a059] transition-colors">İş Kolları</a>
+                <a href="#impact" data-i18n="nav_impact" class="hover:text-[#c5a059] transition-colors">Global Etki</a>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <!-- Multi-Language Selector -->
+                <div class="relative group">
+                    <button class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10 text-[10px] font-black">
+                        <i class="fas fa-globe text-[#c5a059]"></i>
+                        <span id="active-lang">TR</span>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-40 bg-slate-900 rounded-xl overflow-hidden hidden group-hover:block shadow-2xl border border-white/10">
+                        <button onclick="setLang('tr')" class="w-full text-left px-4 py-3 text-[10px] hover:bg-white/5 font-bold uppercase">Türkçe</button>
+                        <button onclick="setLang('en')" class="w-full text-left px-4 py-3 text-[10px] hover:bg-white/5 font-bold uppercase">English</button>
+                        <button onclick="setLang('id')" class="w-full text-left px-4 py-3 text-[10px] hover:bg-white/5 font-bold uppercase">Indonesia</button>
+                        <button onclick="setLang('ru')" class="w-full text-left px-4 py-3 text-[10px] hover:bg-white/5 font-bold uppercase">Русский</button>
+                        <button onclick="setLang('de')" class="w-full text-left px-4 py-3 text-[10px] hover:bg-white/5 font-bold uppercase">Deutsch</button>
+                    </div>
+                </div>
+                <button class="bg-[#c5a059] text-black px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#f5d18d] transition-all">
+                    Investor Hub
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-24">
+        
+        <!-- Hero Section -->
+        <section id="vision" class="min-h-screen flex items-center justify-center relative px-6 bg-slate-950">
+            <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <div class="inline-block px-4 py-1 border border-[#c5a059]/30 rounded-full text-[10px] font-bold tracking-[0.5em] uppercase text-[#c5a059] mb-10">
+                    A Global Venture & Technology Collective
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black mb-10 leading-tight">
+                    <span data-i18n="hero_h1">Geleceği</span> <br>
+                    <span class="gold-gradient" data-i18n="hero_h2">Orkestra Ediyoruz.</span>
+                </h1>
+                <p class="text-xl text-white/40 font-light max-w-3xl mx-auto leading-relaxed" data-i18n="hero_p">
+                    Yazılımın gücünü gayrimenkul ve enerji yatırımlarıyla birleştiren, karmaşık küresel süreçleri teknolojiyle basitleştiren bir ekosistem.
+                </p>
+                <div class="mt-16 flex justify-center gap-12 text-white/20">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white mb-1">4</div>
+                        <div class="text-[9px] font-bold uppercase tracking-widest">Global Hub</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white mb-1">Odoo</div>
+                        <div class="text-[9px] font-bold uppercase tracking-widest">Core Stack</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white mb-1">100%</div>
+                        <div class="text-[9px] font-bold uppercase tracking-widest">Automated</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Verticals -->
+        <section id="verticals" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-24 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6" data-i18n="vert_h">İş Kollarımız</h2>
+                    <p class="text-white/30 max-w-2xl mx-auto" data-i18n="vert_p">Telkon One Group'un her bir dikey birimi, kendi alanında teknolojik DNA'mızı taşıyan bağımsız birer uzmanlık merkezidir.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Vertical: Digital -->
+                    <div class="vertical-card p-12 rounded-[48px]">
+                        <div class="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center text-3xl mb-10">
+                            <i class="fas fa-microchip gold-gradient"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Telkon Digital</h3>
+                        <p class="text-sm text-white/40 leading-relaxed mb-8" data-i18n="v_dig_p">Global Odoo implementasyonları, yapay zeka entegrasyonları ve işletmelerin dijital dönüşüm süreçlerini yöneten yazılım kolumuz.</p>
+                        <div class="flex gap-2">
+                            <span class="text-[9px] px-3 py-1 bg-white/5 rounded-full font-bold uppercase tracking-widest text-[#c5a059]">Odoo Expert</span>
+                        </div>
+                    </div>
+
+                    <!-- Vertical: Ventures -->
+                    <div class="vertical-card p-12 rounded-[48px] border-[#c5a059]/30 bg-[#c5a059]/5">
+                        <div class="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center text-3xl mb-10">
+                            <i class="fas fa-chart-line gold-gradient"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Telkon Ventures</h3>
+                        <p class="text-sm text-white/40 leading-relaxed mb-8" data-i18n="v_ven_p">Bali Investment Hub gibi yüksek potansiyelli küresel pazar yerlerini ve yatırım fırsatlarını yöneten stratejik kolumuz.</p>
+                        <div class="flex gap-2">
+                            <span class="text-[9px] px-3 py-1 bg-[#c5a059] text-black rounded-full font-bold uppercase tracking-widest">Marketplace</span>
+                        </div>
+                    </div>
+
+                    <!-- Vertical: Energy -->
+                    <div class="vertical-card p-12 rounded-[48px]">
+                        <div class="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center text-3xl mb-10">
+                            <i class="fas fa-bolt gold-gradient"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Telkon Infra</h3>
+                        <p class="text-sm text-white/40 leading-relaxed mb-8" data-i18n="v_inf_p">Sürdürülebilir inşaat metodolojileri, güneş enerjisi yatırımları ve akıllı altyapılar ile geleceği inşa ediyoruz.</p>
+                        <div class="flex gap-2">
+                            <span class="text-[9px] px-3 py-1 bg-white/5 rounded-full font-bold uppercase tracking-widest text-[#c5a059]">Sustainable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Impact Section -->
+        <section id="impact" class="py-32 bg-black border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-8" data-i18n="impact_h">Veriyle Geleceği Okuyoruz</h2>
+                    <p class="text-white/40 mb-12" data-i18n="impact_p">Telkon One Group, tüm operasyonel ağırlığını Odoo tabanlı gerçek zamanlı verilerle yönetir. Bu şeffaflık, global ölçekte güvenimizin kaynağıdır.</p>
+                    <div class="space-y-6">
+                        <div class="flex justify-between border-b border-white/5 pb-4">
+                            <span class="text-xs font-bold uppercase tracking-widest opacity-60">Digital / Software</span>
+                            <span class="text-xl font-bold gold-gradient">45%</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-4">
+                            <span class="text-xs font-bold uppercase tracking-widest opacity-60">Ventures / Investment</span>
+                            <span class="text-xl font-bold gold-gradient">35%</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-4">
+                            <span class="text-xs font-bold uppercase tracking-widest opacity-60">Energy / Infra</span>
+                            <span class="text-xl font-bold gold-gradient">20%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-10 rounded-[48px] border border-white/10">
+                    <div class="chart-container">
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-20 border-t border-white/5 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-xl font-bold tracking-tighter uppercase">TELKON<span class="text-[#c5a059]">ONE</span> <span class="text-[10px] font-light opacity-40">GROUP</span></div>
+            <div class="text-[10px] text-white/20 font-bold uppercase tracking-[0.3em]">London • Dubai • Bali • Istanbul</div>
+            <div class="flex gap-6 text-white/30">
+                <i class="fab fa-linkedin-in hover:text-white cursor-pointer transition-colors"></i>
+                <i class="fab fa-instagram hover:text-white cursor-pointer transition-colors"></i>
+            </div>
+        </div>
+        <div class="text-center text-[10px] font-bold uppercase tracking-[0.4em] text-white/10 mt-20">© 2026 Telkon One Group. Global Excellence.</div>
+    </footer>
+
+    <script>
+        const dictionary = {
+            tr: {
+                nav_vision: "Vizyon", nav_verticals: "İş Kolları", nav_impact: "Global Etki",
+                hero_h1: "Geleceği", hero_h2: "Orkestra Ediyoruz.",
+                hero_p: "Yazılımın gücünü gayrimenkul ve enerji yatırımlarıyla birleştiren, karmaşık küresel süreçleri teknolojiyle basitleştiren bir ekosistem.",
+                vert_h: "İş Birimlerimiz", vert_p: "Telkon One Group'un her bir dikey birimi, kendi alanında teknolojik DNA'mızı taşıyan bağımsız birer uzmanlık merkezidir.",
+                v_dig_p: "Global Odoo implementasyonları, yapay zeka entegrasyonları ve dijital dönüşüm süreçlerini yöneten yazılım kolumuz.",
+                v_ven_p: "Bali Investment Hub gibi yüksek potansiyelli küresel pazar yerlerini ve yatırım fırsatlarını yöneten stratejik kolumuz.",
+                v_inf_p: "Sürdürülebilir inşaat metodolojileri, güneş enerjisi yatırımları ve akıllı altyapılar ile geleceği inşa ediyoruz.",
+                impact_h: "Veriyle Geleceği Okuyoruz", impact_p: "Telkon One Group, tüm operasyonel ağırlığını Odoo tabanlı gerçek zamanlı verilerle yönetir."
+            },
+            en: {
+                nav_vision: "Vision", nav_verticals: "Verticals", nav_impact: "Global Impact",
+                hero_h1: "Orchestrating", hero_h2: "The Future.",
+                hero_p: "An ecosystem that combines software power with real estate and energy investments, simplifying complex global processes through technology.",
+                vert_h: "Our Verticals", vert_p: "Each vertical of Telkon One Group is an independent center of excellence, united by our technological DNA.",
+                v_dig_p: "Our software arm managing global Odoo implementations, AI integrations, and digital transformation processes.",
+                v_ven_p: "Our strategic arm managing high-potential global marketplaces and investment opportunities like Bali Investment Hub.",
+                v_inf_p: "Building the future with sustainable construction methodologies, solar energy investments, and smart infrastructures.",
+                impact_h: "Reading the Future with Data", impact_p: "Telkon One Group manages its operational weight with Odoo-based real-time data."
+            }
+            // Diğer diller (ID, RU, DE) benzer şekilde eklenebilir...
+        };
+
+        function setLang(l) {
+            document.getElementById('active-lang').innerText = l.toUpperCase();
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dictionary[l] && dictionary[l][key]) el.innerText = dictionary[l][key];
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Digital', 'Ventures', 'Infra'],
+                    datasets: [{
+                        data: [45, 35, 20],
+                        backgroundColor: ['rgba(197, 160, 89, 0.7)', 'rgba(255, 255, 255, 0.1)', 'rgba(255, 255, 255, 0.05)'],
+                        borderColor: 'rgba(197, 160, 89, 0.2)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { r: { ticks: { display: false }, grid: { color: 'rgba(255,255,255,0.05)' }, angleLines: { color: 'rgba(255,255,255,0.05)' } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+        window.onload = initChart;
+    </script>
+</body>
+</html>
