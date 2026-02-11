@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telkon One - Bali Yatırım HUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin: 0 auto; height: 300px; }
+        .wizard-step { transition: all 0.5s ease-in-out; }
+    </style>
+    <!-- Chosen Palette: Corporate Amber & Slate -->
+    <!-- Application Structure Plan: Interactive SPA with Wizard logic, Real-time Pricing Engine, and Sector Matrix. -->
+    <!-- Visualization & Content Choices: Chart.js for CAPEX breakdown, Dynamic text for tax strategy. NO SVG. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tighter text-slate-900">TELKON<span class="text-amber-600">ONE</span></div>
+            <div class="flex items-center space-x-4">
+                <span class="text-xs font-semibold bg-green-50 text-green-700 px-3 py-1 rounded-full border border-green-200">
+                    <i class="fas fa-circle text-[8px] mr-1"></i> Sistem Online
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <!-- Hero -->
+        <header class="py-16 px-6 text-center bg-white border-b border-slate-100">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-5xl font-bold text-slate-900 mb-6">Bali Yatırım <span class="text-amber-600">Sihirbazı</span></h1>
+                <p class="text-slate-600">Bütçenizi ve sektörünüzü seçin, yasal ve mali yol haritanızı anında görün.</p>
+            </div>
+        </header>
+
+        <!-- Wizard -->
+        <section class="py-12 max-w-4xl mx-auto px-6">
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+                <div id="progress-bar" class="h-2 bg-amber-500 transition-all duration-500 w-1/3"></div>
+                
+                <div class="p-8 md:p-12">
+                    <!-- Step 1: Budget -->
+                    <div id="step-1" class="wizard-step">
+                        <h3 class="text-xl font-bold mb-6">1. Yatırım Bütçeniz Nedir?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <button onclick="setBudget('low')" class="p-6 border-2 rounded-xl hover:border-amber-500 transition-all text-left">
+                                <div class="font-bold">$50k - $150k</div>
+                                <div class="text-xs text-slate-500">Giriş Seviyesi</div>
+                            </button>
+                            <button onclick="setBudget('mid')" class="p-6 border-2 rounded-xl hover:border-amber-500 transition-all text-left">
+                                <div class="font-bold">$150k - $300k</div>
+                                <div class="text-xs text-slate-500">Orta Ölçek</div>
+                            </button>
+                            <button onclick="setBudget('high')" class="p-6 border-2 rounded-xl hover:border-amber-500 transition-all text-left">
+                                <div class="font-bold">$300k+</div>
+                                <div class="text-xs text-slate-500">Premium Yatırım</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Sector -->
+                    <div id="step-2" class="wizard-step hidden">
+                        <h3 class="text-xl font-bold mb-6">2. Sektör Seçiniz</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="sector-grid"></div>
+                    </div>
+
+                    <!-- Step 3: Result -->
+                    <div id="step-3" class="wizard-step hidden">
+                        <div class="text-center">
+                            <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
+                            <h2 class="text-2xl font-bold mb-2">Analiz Tamamlandı</h2>
+                            <p class="text-slate-500 mb-8">Size özel yatırım raporu aşağıdadır.</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                                <h4 class="font-bold mb-4">Maliyet Dağılımı</h4>
+                                <div class="chart-container"><canvas id="costChart"></canvas></div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-amber-600 text-white p-6 rounded-2xl">
+                                    <div class="text-sm opacity-80">Vergi Stratejisi</div>
+                                    <div id="tax-regime" class="text-xl font-bold">Yükleniyor...</div>
+                                    <p id="tax-desc" class="text-sm mt-2 opacity-90"></p>
+                                </div>
+                                <div class="bg-slate-900 text-white p-6 rounded-2xl">
+                                    <div class="text-sm opacity-80">Operasyonel Partner</div>
+                                    <div class="text-xl font-bold">VGR & Telkon One</div>
+                                    <p class="text-sm mt-2 opacity-90">Tüm yasal süreç VGR tarafından yönetilecektir.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="location.reload()" class="mt-8 w-full py-4 bg-slate-200 text-slate-800 rounded-xl font-bold">Yeni Analiz</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const sectors = [
+            { id: 'villa', name: 'Villa Kiralama', kbli: '68111', tax: '%10 Final Tax', desc: 'Brüt kira geliri üzerinden.', cost: 3500 },
+            { id: 'const', name: 'İnşaat', kbli: '41011', tax: '%1.75 - %6 Final', desc: 'Hakediş bazlı vergilendirme.', cost: 5500 },
+            { id: 'fnb', name: 'Restoran/Cafe', kbli: '56101', tax: '%10 PB1 (Belediye)', desc: 'KDV yerine yerel vergi.', cost: 4200 },
+            { id: 'crypto', name: 'Kripto/Fintech', kbli: '66151', tax: '%0.1 VAT + %0.1 Income', desc: 'İşlem bazlı vergi.', cost: 12000 }
+        ];
+
+        let state = { budget: null, sector: null };
+        let chart = null;
+
+        function setBudget(b) {
+            state.budget = b;
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            document.getElementById('progress-bar').style.width = '66%';
+            renderSectors();
+        }
+
+        function renderSectors() {
+            const grid = document.getElementById('sector-grid');
+            grid.innerHTML = sectors.map(s => `
+                <button onclick="setSector('${s.id}')" class="p-4 border-2 rounded-xl hover:border-amber-500 text-left bg-white transition-all">
+                    <div class="font-bold text-slate-800">${s.name}</div>
+                    <div class="text-xs text-slate-400 font-mono">KBLI ${s.kbli}</div>
+                </button>
+            `).join('');
+        }
+
+        function setSector(sid) {
+            state.sector = sectors.find(s => s.id === sid);
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+            document.getElementById('progress-bar').style.width = '100%';
+            showResult();
+        }
+
+        function showResult() {
+            document.getElementById('tax-regime').innerText = state.sector.tax;
+            document.getElementById('tax-desc').innerText = state.sector.desc;
+            
+            const ctx = document.getElementById('costChart').getContext('2d');
+            if(chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Kurulum', 'Lisans', 'Vize', 'Sanal Ofis'],
+                    datasets: [{
+                        data: [2500, state.sector.cost - 2500, 1350, 300],
+                        backgroundColor: ['#d97706', '#475569', '#f59e0b', '#94a3b8'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+    </script>
+</body>
+</html>
